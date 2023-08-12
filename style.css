@@ -23,7 +23,7 @@ body {
 
   .header a {
     float: left;
-    color: black;
+    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -115,7 +115,7 @@ body {
     height: 42px;
     position: fixed;
     bottom: 0;
-    background-color: #141616;
+    background-color: lightcoral;
     z-index: 1;
     color: #FFFFFF !important;
     width: 100%;
