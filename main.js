@@ -68,7 +68,7 @@ let editarTareas = (e) => {
 
   textarea.value = seleccionarTarea.children[0].innerHTML;
 
-  borrarTreas(e);
+  borrarTareas(e);
 };
 
 let resetForm = () => {
