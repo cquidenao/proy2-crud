@@ -1,8 +1,12 @@
+// se seleccionan todos los selectores de htm que vamos a usar
+
 let form = document.getElementById("form");
 let textarea = document.getElementById("textarea");
 let msg = document.getElementById("msg");
 let tareas = document.getElementById("tareas");
 let add = document.getElementById("add");
+
+// validamos que el campo de descripcion  no este en blanco
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -23,7 +27,7 @@ let formValidation = () => {
     })();
   }
 };
-
+// recopilacion de los datos con una funcion accepData y una matris Data y lo empujamos al localstorage 
 let data = [{}];
 
 let acceptData = () => {
@@ -32,11 +36,10 @@ let acceptData = () => {
   });
 
   localStorage.setItem("data", JSON.stringify(data));
-
-  console.log(data);
   crearTareas();
 };
-
+// para crear una nueva tarea se usa literales de plantilla y se usa
+//  un mapa para insertar los datos recopilados del usuario dentro de la plantilla.
 let crearTareas = () => {
   tareas.innerHTML = "";
   data.map((x, y) => {
@@ -52,22 +55,26 @@ let crearTareas = () => {
     `);
   });
 
+  // se tienen que borrar los campos que ingresa el usuario. creando una función llamada resetForm
   resetForm();
 };
-
+// funcio para eliminar tareas
 let borrarTareas = (e) => {
+  // elimina el elemento HTML de la pantalla
   e.parentElement.parentElement.remove();
+  // elimina la tarea objetivo de la matriz de datos
   data.splice(e.parentElement.parentElement.id, 1);
+  // actualiza el almacenamiento local con los nuevos datos.
   localStorage.setItem("data", JSON.stringify(data));
   console.log(data);
   
 };
-
+// funcio para eliminar editar tareas
 let editarTareas = (e) => {
+  // apunta a la tarea que se selecciona para editar
   let seleccionarTarea = e.parentElement.parentElement;
-
   textarea.value = seleccionarTarea.children[0].innerHTML;
-
+  // elimina los datos seleccionados tanto del almacenamiento local, el elemento HTML y la matriz de datos.
   borrarTareas(e);
 };
 
@@ -75,8 +82,3 @@ let resetForm = () => {
   textarea.value = "";
 };
 
-(() => {
-  data = JSON.parse(localStorage.getItem("data")) || []
-  console.log(data);
-  crearTareas();
-})();
